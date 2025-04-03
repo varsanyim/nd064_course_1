@@ -14,7 +14,7 @@ spec:
         - ../helm/values-prod.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: techtrends-staging
+    namespace: prod
   syncPolicy:
     automated:
       prune: true
