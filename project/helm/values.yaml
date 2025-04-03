@@ -1,4 +1,5 @@
-namespace: sandbox
+namespace: 
+  name: sandbox
 name: techtrends
 
 service:
