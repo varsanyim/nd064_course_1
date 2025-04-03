@@ -2,6 +2,12 @@ import sqlite3
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
+import logging
+from datetime import datetime
+
+# Configure logging to include timestamps and output to STDOUT
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
@@ -22,6 +28,70 @@ def get_post(post_id):
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
 
+@app.route('/healthz')
+def isHealthy():
+    try:
+        connection = get_db_connection()
+        table_check_query = '''
+        SELECT name FROM sqlite_master 
+        WHERE type='table' AND name='posts'
+        '''
+        table = connection.execute(table_check_query).fetchone()
+        if not table:
+            raise sqlite3.Error("Table 'posts' does not exist")
+
+        # Check if the necessary fields exist in the 'posts' table
+        column_check_query = '''
+        PRAGMA table_info(posts)
+        '''
+        columns = connection.execute(column_check_query).fetchall()
+        required_columns = {'id', 'created', 'title', 'content'}
+        existing_columns = {column['name'] for column in columns}
+
+        if not required_columns.issubset(existing_columns):
+            raise sqlite3.Error("Table 'posts' does not have the required fields")
+        connection.close()
+        response = {
+            "result": "OK - healthy"
+        }
+        return jsonify(response), 200
+    except sqlite3.Error:
+        response = {
+            "result": "ERROR - database not ready"
+        }
+        return jsonify(response), 500
+
+
+# Track the number of database connections
+db_connection_count = 0
+
+@app.route('/metrics')
+def get_metrics():
+    global db_connection_count
+    try:
+        connection = get_db_connection()
+        post_count = connection.execute('SELECT COUNT(*) FROM posts').fetchone()[0]
+        connection.close()
+        response = {
+            "db_connection_count": db_connection_count,
+            "post_count": post_count
+        }
+        return jsonify(response), 200
+    except sqlite3.Error:
+        response = {
+            "error": "Unable to fetch metrics"
+        }
+        return jsonify(response), 500
+
+# Override the get_db_connection function to track connections
+def get_db_connection():
+    global db_connection_count
+    db_connection_count += 1
+    connection = sqlite3.connect('database.db')
+    connection.row_factory = sqlite3.Row
+    return connection
+
+
 # Define the main route of the web application 
 @app.route('/')
 def index():
@@ -31,18 +101,20 @@ def index():
     return render_template('index.html', posts=posts)
 
 # Define how each individual article is rendered 
-# If the post ID is not found a 404 page is shown
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-      return render_template('404.html'), 404
+        logging.info(f'{datetime.now()}, Article with ID {post_id} does not exist. Returning 404.')
+        return render_template('404.html'), 404
     else:
-      return render_template('post.html', post=post)
+        logging.info(f'{datetime.now()}, Article "{post["title"]}" retrieved!')
+        return render_template('post.html', post=post)
 
 # Define the About Us page
 @app.route('/about')
 def about():
+    logging.info(f'{datetime.now()}, "About Us" page retrieved!')
     return render_template('about.html')
 
 # Define the post creation functionality 
@@ -60,7 +132,7 @@ def create():
                          (title, content))
             connection.commit()
             connection.close()
-
+            logging.info(f'{datetime.now()}, New article "{title}" created!')
             return redirect(url_for('index'))
 
     return render_template('create.html')

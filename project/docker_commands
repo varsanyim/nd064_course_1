@@ -1,11 +1,41 @@
 ## Docker commands used to build the application 
-# TODO: insert the docker build command
+
+```bash
+docker build -t techtrends -f Dockerfile .
+``` 
 
 ## Docker commands used to run the application
-# TODO: insert the docker run command
+```bash
+docker run -d -p 7111:3111 --name techtrends techtrends
+docker start techtrends
+```
 
 ## Docker commands used to get the application logs
-# TODO: insert the docker logs command
+```bash
+docker logs -f techtrends
+```
 
 ## Logs from the container running the TechTrends application
-# TODO: paste logs from the Docker container 
+(.venv) chris@udacity-cloud:~/nd064_course_1/project$ docker logs -f techtrends
+ * Serving Flask app 'app' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+2025-04-03 18:42:31,106 - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-03 18:42:31,107 - INFO -  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
+2025-04-03 18:43:05,964 - INFO - 192.168.2.112 - - [03/Apr/2025 18:43:05] "GET /metrics HTTP/1.1" 200 -
+2025-04-03 18:43:06,013 - INFO - 192.168.2.112 - - [03/Apr/2025 18:43:06] "GET /favicon.ico HTTP/1.1" 404 -
+2025-04-03 18:43:09,791 - INFO - 192.168.2.112 - - [03/Apr/2025 18:43:09] "GET / HTTP/1.1" 200 -
+2025-04-03 18:43:09,817 - INFO - 192.168.2.112 - - [03/Apr/2025 18:43:09] "GET /static/css/main.css HTTP/1.1" 200 -
+2025-04-03 18:48:37,115 - INFO - 192.168.2.112 - - [03/Apr/2025 18:48:37] "GET /create HTTP/1.1" 200 -
+2025-04-03 18:48:37,144 - INFO - 192.168.2.112 - - [03/Apr/2025 18:48:37] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-04-03 18:48:51,181 - INFO - 2025-04-03 18:48:51.181504, New article "Happy App" created!
+2025-04-03 18:48:51,182 - INFO - 192.168.2.112 - - [03/Apr/2025 18:48:51] "POST /create HTTP/1.1" 302 -
+2025-04-03 18:48:51,191 - INFO - 192.168.2.112 - - [03/Apr/2025 18:48:51] "GET / HTTP/1.1" 200 -
+2025-04-03 18:48:51,234 - INFO - 192.168.2.112 - - [03/Apr/2025 18:48:51] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-04-03 18:49:08,885 - INFO - 192.168.2.112 - - [03/Apr/2025 18:49:08] "GET /healthz HTTP/1.1" 200 -
+2025-04-03 18:49:15,452 - INFO - 192.168.2.112 - - [03/Apr/2025 18:49:15] "GET /nopage HTTP/1.1" 404 -
+2025-04-03 18:49:24,168 - INFO - 192.168.2.112 - - [03/Apr/2025 18:49:24] "GET /metrics HTTP/1.1" 200 -
+
