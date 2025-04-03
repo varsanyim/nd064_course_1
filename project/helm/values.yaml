@@ -16,6 +16,11 @@ container:
   port: 3111
   image: varsanyim/techtrends:latest
 
+image:
+  repository: varsanyim/techtrends
+  tag: latest
+  pullPolicy: IfNotPresent
+
 replicaCount: 1
 
 resources:
