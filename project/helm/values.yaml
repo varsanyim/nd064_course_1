@@ -11,10 +11,10 @@ service:
   protocol: TCP
   type: ClusterIP
 
-image:
-  repository: techtrends
-  tag: latest
-  pullPolicy: IfNotPresent
+container:
+  name: techtrends
+  port: 3111
+  image: varsanyim/techtrends:latest
 
 replicaCount: 1
 
@@ -25,10 +25,6 @@ resources:
   limits:
     memory: 128Mi
     cpu: 500m
-
-container:
-  name: techtrends
-  port: 3111
 
 probes:
   liveness:
