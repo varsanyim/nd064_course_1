@@ -22,7 +22,9 @@ resources:
     memory: 128Mi
     cpu: 500m
 
-containerPort: 3111
+container:
+  name: techtrends
+  port: 3111
 
 livenessProbe:
   path: /healthz
