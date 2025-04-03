@@ -26,7 +26,7 @@ container:
   name: techtrends
   port: 3111
 
-probe:
+probes:
   liveness:
     path: /healthz
     port: 3111
