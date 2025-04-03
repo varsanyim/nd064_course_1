@@ -16,6 +16,19 @@ docker logs -f techtrends
 ```
 
 ## Logs from the container running the TechTrends application
+(.venv) chris@udacity-cloud:~/nd064_course_1/project$ ip addr show ens18
+2: ens18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether bc:24:11:ed:a6:6f brd ff:ff:ff:ff:ff:ff
+    altname enp0s18
+    inet 192.168.2.146/24 brd 192.168.2.255 scope global dynamic ens18
+       valid_lft 1206866sec preferred_lft 1206866sec
+    inet6 2003:c1:4f43:895a:be24:11ff:feed:a66f/64 scope global dynamic mngtmpaddr 
+       valid_lft 172775sec preferred_lft 86375sec
+    inet6 2003:c1:4f43:89ed:be24:11ff:feed:a66f/64 scope global deprecated dynamic mngtmpaddr 
+       valid_lft 16524sec preferred_lft 0sec
+    inet6 fe80::be24:11ff:feed:a66f/64 scope link 
+       valid_lft forever preferred_lft forever
+       
 (.venv) chris@udacity-cloud:~/nd064_course_1/project$ docker logs -f techtrends
  * Serving Flask app 'app' (lazy loading)
  * Environment: production
