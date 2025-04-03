@@ -8,10 +8,10 @@ spec:
   source:
     repoURL: 'https://github.com/varsanyim/nd064_course_1.git'
     targetRevision: HEAD
-    path: project/helm
+    path: helm
     helm:
       valueFiles:
-        - project/helm/values-staging.yaml
+        - helm/values-staging.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: techtrends-staging
