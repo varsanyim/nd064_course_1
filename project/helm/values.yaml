@@ -28,10 +28,8 @@ container:
 
 probe:
   liveness:
-    httpGet:
-      path: /healthz
-      port: 3111
+    path: /healthz
+    port: 3111
   readiness:
-    httpGet:
-      path: /healthz
-      port: 3111
+    path: /healthz
+    port: 3111
