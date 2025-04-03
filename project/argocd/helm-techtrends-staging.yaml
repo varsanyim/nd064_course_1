@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: techtrends-staging
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/varsanyim/nd064_course_1.git'
+    targetRevision: HEAD
+    path: project/helm/Charts.yaml
+    helm:
+      valueFiles:
+        - project/helm/values-staging.yaml
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: techtrends-staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
