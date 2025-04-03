@@ -1,7 +1,7 @@
-namespace:
-  name: sandbox
+namespace: sandbox
 
 service:
+  name: techtrends
   port: 4111
   targetPort: 3111
   protocol: TCP
