@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/varsanyim/nd064_course_1.git'
     targetRevision: HEAD
-    path: project/helm/Charts.yaml
+    path: project/helm
     helm:
       valueFiles:
         - project/helm/values-staging.yaml
