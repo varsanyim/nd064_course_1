@@ -34,5 +34,7 @@ resources:
 probes:
   liveness:
     path: /healthz
+    port: 3111
   readiness:
     path: /healthz
+    port: 3111

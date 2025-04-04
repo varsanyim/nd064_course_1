@@ -16,39 +16,29 @@ docker logs -f techtrends
 ```
 
 ## Logs from the container running the TechTrends application
-(.venv) chris@udacity-cloud:~/nd064_course_1/project$ ip addr show ens18
-2: ens18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-    link/ether bc:24:11:ed:a6:6f brd ff:ff:ff:ff:ff:ff
-    altname enp0s18
-    inet 192.168.2.146/24 brd 192.168.2.255 scope global dynamic ens18
-       valid_lft 1206866sec preferred_lft 1206866sec
-    inet6 2003:c1:4f43:895a:be24:11ff:feed:a66f/64 scope global dynamic mngtmpaddr 
-       valid_lft 172775sec preferred_lft 86375sec
-    inet6 2003:c1:4f43:89ed:be24:11ff:feed:a66f/64 scope global deprecated dynamic mngtmpaddr 
-       valid_lft 16524sec preferred_lft 0sec
-    inet6 fe80::be24:11ff:feed:a66f/64 scope link 
-       valid_lft forever preferred_lft forever
-       
-(.venv) chris@udacity-cloud:~/nd064_course_1/project$ docker logs -f techtrends
- * Serving Flask app 'app' (lazy loading)
- * Environment: production
+chris@udacity-cloud:~/nd064_course_1/project/techtrends$ docker logs -f techtrends                                    
+ * Serving Flask app 'app' (lazy loading)                                                                             
+ * Environment: production                                                                                            
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
- * Debug mode: off
-2025-04-03 18:42:31,106 - WARNING -  * Running on all addresses.
+ * Debug mode: off                      
+2025-04-04 17:17:06,765 - WARNING -  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
-2025-04-03 18:42:31,107 - INFO -  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
-2025-04-03 18:43:05,964 - INFO - 192.168.2.112 - - [03/Apr/2025 18:43:05] "GET /metrics HTTP/1.1" 200 -
-2025-04-03 18:43:06,013 - INFO - 192.168.2.112 - - [03/Apr/2025 18:43:06] "GET /favicon.ico HTTP/1.1" 404 -
-2025-04-03 18:43:09,791 - INFO - 192.168.2.112 - - [03/Apr/2025 18:43:09] "GET / HTTP/1.1" 200 -
-2025-04-03 18:43:09,817 - INFO - 192.168.2.112 - - [03/Apr/2025 18:43:09] "GET /static/css/main.css HTTP/1.1" 200 -
-2025-04-03 18:48:37,115 - INFO - 192.168.2.112 - - [03/Apr/2025 18:48:37] "GET /create HTTP/1.1" 200 -
-2025-04-03 18:48:37,144 - INFO - 192.168.2.112 - - [03/Apr/2025 18:48:37] "GET /static/css/main.css HTTP/1.1" 304 -
-2025-04-03 18:48:51,181 - INFO - 2025-04-03 18:48:51.181504, New article "Happy App" created!
-2025-04-03 18:48:51,182 - INFO - 192.168.2.112 - - [03/Apr/2025 18:48:51] "POST /create HTTP/1.1" 302 -
-2025-04-03 18:48:51,191 - INFO - 192.168.2.112 - - [03/Apr/2025 18:48:51] "GET / HTTP/1.1" 200 -
-2025-04-03 18:48:51,234 - INFO - 192.168.2.112 - - [03/Apr/2025 18:48:51] "GET /static/css/main.css HTTP/1.1" 304 -
-2025-04-03 18:49:08,885 - INFO - 192.168.2.112 - - [03/Apr/2025 18:49:08] "GET /healthz HTTP/1.1" 200 -
-2025-04-03 18:49:15,452 - INFO - 192.168.2.112 - - [03/Apr/2025 18:49:15] "GET /nopage HTTP/1.1" 404 -
-2025-04-03 18:49:24,168 - INFO - 192.168.2.112 - - [03/Apr/2025 18:49:24] "GET /metrics HTTP/1.1" 200 -
+2025-04-04 17:17:06,765 - INFO -  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
+2025-04-04 17:17:07,547 - INFO - 172.17.0.1 - - [04/Apr/2025 17:17:07] "GET / HTTP/1.1" 200 -
+2025-04-04 17:24:50,302 - INFO - 2025-04-04 17:24:50.302820, "About Us" page retrieved!      
+2025-04-04 17:24:50,352 - INFO - 172.17.0.1 - - [04/Apr/2025 17:24:50] "GET /about HTTP/1.1" 200 -
+2025-04-04 17:24:59,751 - INFO - 2025-04-04 17:24:59.751729, Article "2020 CNCF Annual Report" retrieved!
+2025-04-04 17:24:59,791 - INFO - 172.17.0.1 - - [04/Apr/2025 17:24:59] "GET /1 HTTP/1.1" 200 - 
+2025-04-04 17:25:09,241 - INFO - 172.17.0.1 - - [04/Apr/2025 17:25:09] "GET /create HTTP/1.1" 200 -
+2025-04-04 17:25:21,095 - INFO - 2025-04-04 17:25:21.095816, New article "Happy code" created!  
+2025-04-04 17:25:21,096 - INFO - 172.17.0.1 - - [04/Apr/2025 17:25:21] "POST /create HTTP/1.1" 302 -
+2025-04-04 17:26:23,859 - INFO - 172.17.0.1 - - [04/Apr/2025 17:26:23] "GET /metrics HTTP/1.1" 200 -
+2025-04-04 17:26:38,181 - INFO - 172.17.0.1 - - [04/Apr/2025 17:26:38] "GET /healthz HTTP/1.1" 200 -
+2025-04-04 17:27:03,951 - INFO - 172.17.0.1 - - [04/Apr/2025 17:27:03] "GET /non_existing_article HTTP/1.1" 404 -
 
+summary:
+EXISTING ARTICLE:	2025-04-04 17:24:59,751 - INFO - 2025-04-04 17:24:59.751729, Article "2020 CNCF Annual Report" retrieved!
+NON EXISTING ARTICLE:	2025-04-04 17:27:03,951 - INFO - 172.17.0.1 - - [04/Apr/2025 17:27:03] "GET /non_existing_article HTTP/1.1" 404 -
+ABOUT US PAGE:		2025-04-04 17:24:50,352 - INFO - 172.17.0.1 - - [04/Apr/2025 17:24:50] "GET /about HTTP/1.1" 200 -
+NEW ARTICLE:		2025-04-04 17:25:21,095 - INFO - 2025-04-04 17:25:21.095816, New article "Happy code" created!  

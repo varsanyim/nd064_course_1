@@ -28,8 +28,8 @@ spec:
         livenessProbe:
           httpGet:
             path: {{ .Values.probes.liveness.path }}
-            port: {{ .Values.container.port }}
+            port: {{ .Values.probes.liveness.port }}
         readinessProbe:
           httpGet:
             path: {{ .Values.probes.readiness.path }}
-            port: {{ .Values.container.port }}
+            port: {{ .Values.probes.readiness.port }}
