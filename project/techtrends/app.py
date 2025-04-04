@@ -4,9 +4,23 @@ from flask import Flask, jsonify, json, render_template, request, url_for, redir
 from werkzeug.exceptions import abort
 import logging
 from datetime import datetime
+import sys
 
-# Configure logging to include timestamps and output to STDOUT
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+stdout_handler = logging.StreamHandler(sys.stdout)
+stdout_handler.setLevel(logging.DEBUG)
+stdout_handler.addFilter(lambda record: record.levelno < logging.WARNING)
+
+stderr_handler = logging.StreamHandler(sys.stderr)
+stderr_handler.setLevel(logging.WARNING)
+
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+stdout_handler.setFormatter(formatter)
+stderr_handler.setFormatter(formatter)
+
+logger.handlers = [stdout_handler, stderr_handler]
 
 
 # Function to get a database connection.
@@ -105,7 +119,7 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-        logging.info(f'{datetime.now()}, Article with ID {post_id} does not exist. Returning 404.')
+        logging.error(f'{datetime.now()}, Article with ID {post_id} does not exist. Returning 404.')
         return render_template('404.html'), 404
     else:
         logging.info(f'{datetime.now()}, Article "{post["title"]}" retrieved!')
